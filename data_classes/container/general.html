@@ -329,8 +329,10 @@ stable division, using <code class="docutils literal notranslate"><span class="p
 <span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">stable_divide</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_denominator</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 <span class="go">{</span>
-<span class="go">    a: ivy.array([0.4, 0.444]),</span>
-<span class="go">    b: ivy.array([0.909, 2.5])</span>
+<span class="go">    a: ivy.array([[0.5, 1.],</span>
+<span class="go">          [1.5, 2.]]),</span>
+<span class="go">    b: ivy.array([[2.5, 3.],</span>
+<span class="go">          [3.5, 4.]])</span>
 <span class="go">}</span>
 </pre></div>
 </div>
