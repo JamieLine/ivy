@@ -795,8 +795,8 @@
 <span class="sd">            b: ivy.array([1.8, 2.4])</span>
 <span class="sd">        }</span>
 
-<span class="sd">        &gt;&gt;&gt; x = ivy.Container(a=ivy.asarray([2., 4.], [6., 8.]),\</span>
-<span class="sd">                              b=ivy.asarray([10., 12.], [14., 16.]))</span>
+<span class="sd">        &gt;&gt;&gt; x = ivy.Container(a=ivy.asarray([[2., 4.], [6., 8.]]),\</span>
+<span class="sd">                              b=ivy.asarray([[10., 12.], [14., 16.]]))</span>
 <span class="sd">        &gt;&gt;&gt; z = x.stable_divide(2, min_denominator=2)</span>
 <span class="sd">        &gt;&gt;&gt; print(z)</span>
 <span class="sd">        {</span>
