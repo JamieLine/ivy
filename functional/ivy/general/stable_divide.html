@@ -251,8 +251,8 @@ denominator for numerical stability.</p>
 &gt;&gt;&gt; print(x)
 (5.000444502911705e-13+0.9999999999995j)</p>
 <p>With <code class="code docutils literal notranslate"><span class="pre">ivy.Array</span></code> input:
-&gt;&gt;&gt; x = ivy.asarray([[10, 20, 30],                        [40, 50, 60]])
-&gt;&gt;&gt; y = ivy.stable_divide(x, 10)
+&gt;&gt;&gt; x = ivy.asarray([[10., 20., 30.],                        [40., 50., 60.]])
+&gt;&gt;&gt; y = ivy.stable_divide(x, 10.)
 &gt;&gt;&gt; print(y)
 ivy.array([[1., 2., 3.],</p>
 <blockquote>
