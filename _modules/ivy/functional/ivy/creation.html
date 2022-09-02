@@ -151,20 +151,6 @@
 <span class="c1"># Helpers #</span>
 <span class="c1"># --------#</span>
 
-<span class="c1"># Used to speed up asarray in each of the backends.</span>
-<span class="k">def</span> <span class="nf">_is_raw_python_list_or_scalar</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)):</span>
-        <span class="n">is_list_or_python_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">_is_raw_python_list_or_scalar</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">array</span><span class="p">]</span>
-        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">is_list_or_python_data</span><span class="p">)</span>  <span class="c1"># If every item in there is True</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span>
-        <span class="n">array</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
-    <span class="p">):</span>  <span class="c1"># If this is the first input that&#39;s fine,</span>
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="kc">True</span>  <span class="c1"># If this is not the first input, it means we&#39;ve found a &quot;leaf&quot; item.</span>
-        <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">False</span>
-
 
 <span class="k">def</span> <span class="nf">_assert_fill_value_and_dtype_are_compatible</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">fill_value</span><span class="p">):</span>
     <span class="k">assert</span> <span class="p">(</span>
@@ -251,9 +237,7 @@
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="asarray"><a class="viewcode-back" href="../../../../functional/ivy/creation/asarray/asarray_functional.html#ivy.functional.ivy.creation.asarray">[docs]</a><span class="nd">@outputs_to_ivy_arrays</span>
-<span class="c1"># @to_native_arrays_and_back</span>
-<span class="c1"># @asarray_to_native_arrays_and_back</span>
+<div class="viewcode-block" id="asarray"><a class="viewcode-back" href="../../../../functional/ivy/creation/asarray/asarray_functional.html#ivy.functional.ivy.creation.asarray">[docs]</a><span class="nd">@to_native_arrays_and_back</span>
 <span class="nd">@handle_out_argument</span>
 <span class="nd">@infer_device</span>
 <span class="nd">@handle_nestable</span>
