@@ -13,7 +13,8 @@ Initializers
    :maxdepth: -1
    :caption: Initializers
 
-   initializers/Initializer.rst
+   initializers/Initalizer:
+    def create_variables.rst
    initializers/Constant.rst
    initializers/Zeros.rst
    initializers/Ones.rst
