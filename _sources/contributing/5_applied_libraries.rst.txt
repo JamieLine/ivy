@@ -1,5 +1,5 @@
-Applied Libraries
-=================
+Ivy Applied Libraries Development Guide
+=======================================
 
 .. _`Ivy Robot`: https://lets-unify.ai/robot/
 .. _`Mech`: https://lets-unify.ai/mech/
