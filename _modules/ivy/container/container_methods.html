@@ -947,7 +947,7 @@
 <span class="kn">import</span> <span class="nn">ivy</span>
 
 
-<span class="n">ansi_escape</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\x1B(?:[@-Z</span><span class="se">\\</span><span class="s2">-_]|\[[0-?]*[ -/]*[@-~])&quot;</span><span class="p">)</span>
+<span class="n">ansi_escape</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\x1B(?:[-Z</span><span class="se">\\</span><span class="s2">-_]|\[[0-?]*[ -/]*[-~])&quot;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_is_jsonable</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -1763,10 +1763,11 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    With ivy.Container input</span>
+<span class="sd">    With :code:`ivy.Container` input:</span>
+
 <span class="sd">    &gt;&gt;&gt; x = ivy.Container(a = ivy.array([1,2,3]) ,b = ivy.array([4,5,6]))</span>
 <span class="sd">    &gt;&gt;&gt; fill_value = 10</span>
-<span class="sd">    &gt;&gt;&gt; y = ivy.Container.full_like(fill_value)</span>
+<span class="sd">    &gt;&gt;&gt; y = ivy.Container.static_full_like(fill_value)</span>
 <span class="sd">    {</span>
 <span class="sd">        a: ivy.array([10, 10, 10]),</span>
 <span class="sd">        b: ivy.array([10, 10, 10])</span>
@@ -1775,7 +1776,7 @@
 <span class="sd">    &gt;&gt;&gt; x = ivy.Container(a=ivy.array([1.2,2.2324,3.234]), \</span>
 <span class="sd">                           b=ivy.array([4.123,5.23,6.23]))</span>
 <span class="sd">    &gt;&gt;&gt; fill_value = 15.0</span>
-<span class="sd">    &gt;&gt;&gt; y = ivy.Container.full_like(fill_value)</span>
+<span class="sd">    &gt;&gt;&gt; y = ivy.Container.static_full_like(fill_value)</span>
 <span class="sd">    &gt;&gt;&gt; print(y)</span>
 <span class="sd">    {</span>
 <span class="sd">        a: ivy.array([15., 15., 15.]),</span>
@@ -1837,7 +1838,8 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    With ivy.Container input</span>
+<span class="sd">    With :code:`ivy.Container` input:</span>
+
 <span class="sd">    &gt;&gt;&gt; x = ivy.Container(a = ivy.array([1,2,3]) ,b = ivy.array([4,5,6]))</span>
 <span class="sd">    &gt;&gt;&gt; fill_value = 10</span>
 <span class="sd">    &gt;&gt;&gt; y = x.full_like(fill_value)</span>
@@ -2676,6 +2678,7 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    With :code:`ivy.Container` static method:</span>
+
 <span class="sd">    &gt;&gt;&gt; x = ivy.Container(a=ivy.array([1]),\</span>
 <span class="sd">        b=ivy.array([2]))</span>
 <span class="sd">    &gt;&gt;&gt; y = ivy.Container.static_broadcast_to(x,(3, 1))</span>
@@ -2724,7 +2727,8 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    With :code: &#39;ivy.Container&#39; instance method:</span>
+<span class="sd">    With :code:`ivy.Container` instance method:</span>
+<span class="sd">    </span>
 <span class="sd">    &gt;&gt;&gt; x = ivy.Container(a=ivy.array([0, 0.5]),\</span>
 <span class="sd">        b=ivy.array([4, 5]))</span>
 <span class="sd">    &gt;&gt;&gt; y = x.broadcast_to((3,2))</span>
@@ -14523,7 +14527,7 @@
         <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">,</span>
     <span class="p">)</span></div>
 
-<span class="nd">@staticmethod</span>
+<span class="nd">staticmethod</span>
 <span class="k">def</span> <span class="nf">static_multi_head_attention</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
     <span class="n">scale</span><span class="p">,</span>
@@ -14603,7 +14607,7 @@
         <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">,</span>
     <span class="p">)</span></div>
 
-<span class="nd">@staticmethod</span>
+<span class="nd">staticmethod</span>
 <span class="k">def</span> <span class="nf">static_conv1d</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
     <span class="n">filters</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
@@ -14911,7 +14915,7 @@
         <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">,</span>
     <span class="p">)</span></div>
 
-<span class="nd">@staticmethod</span>
+<span class="nd">staticmethod</span>
 <span class="k">def</span> <span class="nf">static_conv2d_transpose</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
     <span class="n">filters</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
@@ -14975,7 +14979,7 @@
         <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">,</span>
     <span class="p">)</span></div>
 
-<span class="nd">@staticmethod</span>
+<span class="nd">staticmethod</span>
 <span class="k">def</span> <span class="nf">static_depthwise_conv2d</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
     <span class="n">filters</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
@@ -15694,7 +15698,7 @@
         <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span></div>
 
-<span class="nd">@staticmethod</span>
+<span class="nd">staticmethod</span>
 <span class="k">def</span> <span class="nf">static_inner</span><span class="p">(</span>
     <span class="n">x1</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
     <span class="n">x2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
@@ -15796,7 +15800,7 @@
 
 
 <div class="viewcode-block" id="static_pinv"><a class="viewcode-back" href="../../../functional/ivy/linear_algebra/pinv/static_pinv_container.html#ivy.container.container_methods.static_pinv">[docs]</a><span class="k">def</span> <span class="nf">static_pinv</span><span class="p">(</span>
-    <span class="n">x</span> <span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
     <span class="o">/</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">rtol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -15855,7 +15859,7 @@
     <span class="bp">self</span><span class="p">:</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
     <span class="o">/</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">rtol</span> <span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rtol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -16095,7 +16099,7 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    With :code: `ivy.Container` input:</span>
+<span class="sd">    With :code:`ivy.Container` input:</span>
 
 <span class="sd">    &gt;&gt;&gt; x = ivy.Container(a=ivy.array([[1., 0.], [0., 1.]]), \</span>
 <span class="sd">                          b=ivy.array([[1., 0.], [0., 0.]]))</span>
@@ -16163,7 +16167,7 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    With :code: `ivy.Container` input:</span>
+<span class="sd">    With :code:`ivy.Container` input:</span>
 <span class="sd">    &gt;&gt;&gt; x = ivy.Container(a=ivy.array([[1., 0.], [0., 1.]]), \</span>
 <span class="sd">                            b=ivy.array([[1., 0.], [0., 0.]]))</span>
 <span class="sd">    &gt;&gt;&gt; y = x.matrix_rank()</span>
@@ -16343,7 +16347,7 @@
         <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">,</span>
     <span class="p">)</span></div>
 
-<span class="nd">@staticmethod</span>
+<span class="nd">staticmethod</span>
 <span class="k">def</span> <span class="nf">static_svdvals</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">],</span>
     <span class="n">key_chains</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -16449,7 +16453,7 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    With :code: `ivy.Container` input:</span>
+<span class="sd">    With :code:`ivy.Container` input:</span>
 <span class="sd">    &gt;&gt;&gt; x = ivy.Container(\</span>
 <span class="sd">        a = ivy.array([[7, 1, 2],\</span>
 <span class="sd">                       [1, 3, 5],\</span>
@@ -16521,7 +16525,7 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    With :code: `ivy.Container` input:</span>
+<span class="sd">    With :code:`ivy.Container` input:</span>
 <span class="sd">    &gt;&gt;&gt; x = ivy.Container(\</span>
 <span class="sd">        a = ivy.array([[7, 1, 2],\</span>
 <span class="sd">                       [1, 3, 5],\</span>
@@ -17515,7 +17519,7 @@
         <span class="n">map_sequences</span><span class="o">=</span><span class="n">map_sequences</span><span class="p">,</span>
     <span class="p">)</span></div>
 
-<span class="nd">@staticmethod</span>
+<span class="nd">staticmethod</span>
 <span class="k">def</span> <span class="nf">static_permute_dims</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span>
     <span class="o">/</span><span class="p">,</span>
