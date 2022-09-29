@@ -1,3 +1,4 @@
+from collections import namedtuple
 import ivy
 
 
@@ -154,3 +155,41 @@ def logcumsumexp(input, dim, *, out=None):
 
 def repeat_interleave(input, repeats, dim=None, *, output_size=None):
     return ivy.repeat(input, repeats, axis=dim)
+
+
+def cummax(input, dim, *, out=None):
+    return_type = namedtuple("cummax", ["values", "indices"])
+
+    # If the input is a scalar
+    if input.shape == 1 or input.shape == (1,):
+        ret = return_type(
+            input,
+            ivy.asarray([0], dtype="int64"),
+        )
+
+    # This makes it so much easier to iterate correctly
+    else:
+        ivy.swapaxes(input, 0, dim)
+        if isinstance(input[0], ivy.Array):
+            return ivy.asarray([cummax(input, 0)])
+        else:
+            current_max = input[0]
+            current_max_index = 0
+            return_maxes = []
+            return_indices = []
+            for index, value in input:
+                if index >= current_max:
+                    current_max = value
+                    current_max_index = index
+
+                return_maxes.append(current_max)
+                return_indices.append(current_max_index)
+
+        ret = return_type(
+            ivy.asarray(return_maxes, dtype=input.dtype),
+            ivy.asarray(return_indices, dtype="int64"),
+        )
+
+    if ivy.exists(out):
+        ivy.inplace_update(out, ret)
+    return ret
