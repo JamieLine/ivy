@@ -1,4 +1,8 @@
+import math
 from collections import namedtuple
+
+import numpy
+
 import ivy
 
 
@@ -134,7 +138,7 @@ def renorm(input, p, dim, maxnorm, *, out=None):
     ret = ivy.reshape(ret, input.shape)
 
     if ivy.exists(out):
-        ivy.inplace_update(out, ret)
+        return ivy.inplace_update(out, ret)
     return ret
 
 
@@ -157,39 +161,77 @@ def repeat_interleave(input, repeats, dim=None, *, output_size=None):
     return ivy.repeat(input, repeats, axis=dim)
 
 
+def _linear_index_to_tuple_index(linear_index, array_shape):
+    ret = []
+
+    for size in array_shape:
+        if linear_index < size:
+            ret.append(linear_index)
+            linear_index = 0
+        else:
+            ret.append(linear_index // size)
+            linear_index = linear_index % size
+
+    assert linear_index == 0
+
+    return ret
+
+
 def cummax(input, dim, *, out=None):
+    return _cummax(input, dim, out=out, isFirst=True)
+
+
+def _cummax(input, dim, *, out=None, isFirst=False):
     return_type = namedtuple("cummax", ["values", "indices"])
 
     # If the input is a scalar
-    if input.shape == 1 or input.shape == (1,):
-        ret = return_type(
-            input,
-            ivy.asarray([0], dtype="int64"),
-        )
+    if input.shape == 1 or input.shape == (1,) or math.prod(tuple(input.shape)) <= 1:
+        ret = return_type(input, ivy.zeros(shape=input.shape, dtype="int64"))
 
     # This makes it so much easier to iterate correctly
     else:
-        ivy.swapaxes(input, 0, dim)
-        if isinstance(input[0], ivy.Array):
-            return ivy.asarray([cummax(input, 0)])
+        if isFirst:
+            input_swapped = ivy.swapaxes(input, 0, len(input.shape) - dim - 1)
+        if isinstance(input_swapped[0], (ivy.Array, numpy.ndarray)):
+            ret = [cummax(input_swapped[i], 0) for i in range(len(input_swapped))]
+            ret = return_type(
+                ivy.asarray(
+                    [ret[i][0] for i in range(len(ret))], dtype=input_swapped.dtype
+                ),
+                ivy.asarray([ret[i][1] for i in range(len(ret))], dtype="int64"),
+            )
         else:
-            current_max = input[0]
+            current_max = input_swapped[0]
             current_max_index = 0
             return_maxes = []
             return_indices = []
-            for index, value in input:
-                if index >= current_max:
+            for index, value in enumerate(input_swapped):
+                if value >= current_max:
                     current_max = value
                     current_max_index = index
 
                 return_maxes.append(current_max)
                 return_indices.append(current_max_index)
 
-        ret = return_type(
-            ivy.asarray(return_maxes, dtype=input.dtype),
-            ivy.asarray(return_indices, dtype="int64"),
-        )
+            return_maxes = ivy.asarray(return_maxes, dtype=input_swapped.dtype)
+            return_indices = ivy.asarray(return_indices, dtype="int64")
+
+            ret = return_type(
+                return_maxes,
+                return_indices,
+            )
+
+    ret = return_type(
+        ivy.asarray(ret[0], dtype=input.dtype),
+        ivy.asarray(ret[1], dtype="int64"),
+    )
+
+    ret = return_type(
+        ivy.reshape(ret[0], input.shape),
+        ivy.reshape(ret[1], input.shape),
+    )
 
     if ivy.exists(out):
+        # TODO: Test against this once inplace_update supports named tuples
         ivy.inplace_update(out, ret)
     return ret
