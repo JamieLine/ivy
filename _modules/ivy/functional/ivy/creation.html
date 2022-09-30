@@ -197,32 +197,12 @@
 <span class="sd">        and return arrays are all converted to `ivy.Array` instances. This wrapper is</span>
 <span class="sd">        specifically for the backend implementations of asarray.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># if isinstance(args[0], list):</span>
 
-        <span class="c1"># This is a really dirty hack to get around the fact that</span>
-        <span class="c1"># ivy.NativeArray is a Union object And repeating its</span>
-        <span class="c1"># definition here is going to drive someone mad when the</span>
-        <span class="c1"># real definition changes.</span>
-
-        <span class="c1"># TODO: When / if Ivy updates to Python3.10, change this</span>
-        <span class="c1">#  to pass a type union into isinstance and use the fact</span>
-        <span class="c1">#  that Union objects are &quot;self-flattening&quot; to make this</span>
-        <span class="c1">#  really elegant</span>
-        <span class="c1"># if isinstance(args[0][0], ivy.Array) or type(args[0][0]).__name__ in str(</span>
-        <span class="c1">#    ivy.NativeArray</span>
-        <span class="c1"># ):</span>
-        <span class="c1">#    return to_ivy(ivy.stack(to_native(args[0]), *(args[1:])))</span>
-        <span class="c1"># return to_ivy(fn(to_native(args[0], nested=True), *(args[1:])))</span>
-        <span class="c1"># return to_ivy(ivy.stack((*(args[0]),), *(args[1:])))</span>
-        <span class="c1"># return to_ivy(fn())</span>
-        <span class="c1"># return to_ivy(fn(*args, dtype=dtype, **kwargs))</span>
-
-        <span class="c1"># args is a tuple and therefore is immutable.</span>
-        <span class="c1"># We also only wish to nest if absolutely needed, and we can decide whether</span>
-        <span class="c1"># it is needed knowing that `fn` is one of the `asarray` implementations.</span>
+        <span class="c1"># When possible we want to not nest this</span>
+        <span class="c1"># because nested calls introduce massive overhead</span>
+        <span class="c1"># and an isinstance call is cheap</span>
         <span class="n">nested</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">)</span>
         <span class="n">new_args</span> <span class="o">=</span> <span class="p">(</span><span class="n">to_native</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nested</span><span class="o">=</span><span class="n">nested</span><span class="p">),)</span> <span class="o">+</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-        <span class="c1"># return to_ivy(fn(*args, dtype=dtype, **kwargs))</span>
         <span class="k">return</span> <span class="n">to_ivy</span><span class="p">(</span><span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">new_args</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">new_fn</span></div>
