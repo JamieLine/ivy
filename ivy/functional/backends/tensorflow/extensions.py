@@ -109,6 +109,16 @@ lcm.unsupported_dtypes = (
     "uint32",
     "uint64")
 
+def gcd(
+    x1: Union[tf.Tensor, tf.Variable],
+    x2: Union[tf.Tensor, tf.Variable],
+    /,
+    *,
+    out: Optional[Union[tf.Tensor, tf.Variable]] = None,
+) -> Union[tf.Tensor, tf.Variable]:
+    return tf.experimental.numpy.gcd(x1, x2)
+
+
 
 def hann_window(
     window_length: int,

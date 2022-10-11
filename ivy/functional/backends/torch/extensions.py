@@ -122,6 +122,18 @@ def lcm(
 
 lcm.support_native_out = True
 
+def gcd(
+    x1: torch.Tensor,
+    x2: torch.Tensor,
+    /,
+    *,
+    dtype: Optional[torch.dtype] = None,
+    out: Optional[torch.Tensor] = None,
+) -> torch.Tensor:
+    return torch.gcd(x1, x2, out=out)
+
+
+gcd.support_native_out = True
 
 def hann_window(
     window_length: int,

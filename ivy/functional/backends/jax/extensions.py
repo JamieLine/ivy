@@ -88,6 +88,14 @@ def lcm(
 ) -> JaxArray:
     return jnp.lcm(x1, x2)
 
+def gcd(
+    x1: JaxArray,
+    x2: JaxArray,
+    /,
+    *,
+    out: Optional[JaxArray] = None
+) -> JaxArray:
+    return jnp.gcd(x1, x2)
 
 def hann_window(
     window_length: int,

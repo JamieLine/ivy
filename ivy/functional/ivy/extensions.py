@@ -669,6 +669,18 @@ def lcm(
     """
     return ivy.current_backend().lcm(x1, x2, out=out)
 
+@to_native_arrays_and_back
+@handle_out_argument
+@handle_nestable
+def gcd(
+    x1: Union[ivy.Array, ivy.NativeArray],
+    x2: Union[ivy.Array, ivy.NativeArray],
+    /,
+    *,
+    out: Optional[ivy.Array] = None,
+) -> ivy.Array:
+    return ivy.current_backend().gcd(x1, x2, out=out)
+
 
 @to_native_arrays_and_back
 @handle_out_argument
@@ -712,3 +724,4 @@ def hann_window(
     """
     return ivy.current_backend().hann_window(
         window_length, periodic, dtype=dtype, out=out)
+

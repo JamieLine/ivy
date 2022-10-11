@@ -98,6 +98,15 @@ def lcm(
                order='K', dtype=None, subok=True)
     )
 
+def gcd(
+    x1: np.ndarray,
+    x2: np.ndarray,
+    /,
+    *,
+    out: Optional[np.ndarray] = None,
+) -> np.ndarray:
+    return np.gcd(x1, x2, out=out, where=True, casting='same_kind', order='K', dtype=None, subok=True)
+
 
 lcm.support_native_out = True
 

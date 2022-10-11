@@ -159,3 +159,11 @@ class ArrayWithExtensions(abc.ABC):
         ivy.array([10, 21, 60])
         """
         return ivy.lcm(self, x2, out=out)
+
+def gcd(
+        self: ivy.Array,
+        x2: ivy.Array,
+        *,
+        out: Optional[ivy.Array] = None
+    ) -> ivy.Array:
+        return ivy.gcd(self, x2, out=out)
