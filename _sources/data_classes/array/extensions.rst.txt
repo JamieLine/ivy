@@ -13,5 +13,6 @@ Extensions
    :maxdepth: -1
    :caption: Extensions
 
+   extensions/gcd.rst
    extensions/ArrayWithExtensions.rst
 
