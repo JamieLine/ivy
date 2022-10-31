@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Ivy Frontends" href="ivy_frontends.html" />
-    <link rel="prev" title="Docstring Examples" href="docstring_examples.html" /> 
+    <link rel="prev" title="Array API Tests" href="array_api_tests.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,8 +44,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../background.html">Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../design.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../related_work.html">Related Work</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../extensions.html">Extensions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../deep_dive.html">Deep Dive</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="navigating_the_code.html">Navigating the Code</a></li>
@@ -62,6 +62,7 @@
 <li class="toctree-l2"><a class="reference internal" href="function_arguments.html">Function Arguments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docstrings.html">Docstrings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docstring_examples.html">Docstring Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="array_api_tests.html">Array API Tests</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Ivy Tests</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#testing-pipeline">Testing Pipeline</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">Hypothesis</a></li>
@@ -89,6 +90,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Functions</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../functional/extensions.html">Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../functional/ivy/activations.html">Activations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../functional/ivy/compilation.html">Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../functional/ivy/constants.html">Constants</a></li>
@@ -96,7 +98,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../functional/ivy/data_type.html">Data type</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../functional/ivy/device.html">Device</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../functional/ivy/elementwise.html">Elementwise</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../functional/ivy/extensions.html">Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../functional/ivy/general.html">General</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../functional/ivy/gradients.html">Gradients</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../functional/ivy/layers.html">Layers</a></li>
@@ -181,7 +182,7 @@ The standard only mandates a subset of required behaviour, which the Ivy functio
 <p>As done in the <a class="reference external" href="https://github.com/data-apis/array-api-tests">test suite</a>, we also make use of <a class="reference external" href="https://hypothesis.readthedocs.io/en/latest/">hypothesis</a> for performing property based testing.</p>
 <section id="testing-pipeline">
 <h2>Testing Pipeline<a class="headerlink" href="#testing-pipeline" title="Permalink to this heading"></a></h2>
-<a class="reference internal image-reference" href="https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/deep_dive/15_ivy_tests/testing_pipeline.png?raw=true"><img alt="https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/deep_dive/15_ivy_tests/testing_pipeline.png?raw=true" class="align-center" src="https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/deep_dive/15_ivy_tests/testing_pipeline.png?raw=true" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/deep_dive/ivy_tests/testing_pipeline.png?raw=true"><img alt="https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/deep_dive/ivy_tests/testing_pipeline.png?raw=true" class="align-center" src="https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/deep_dive/ivy_tests/testing_pipeline.png?raw=true" style="width: 100%;" /></a>
 <p><em>An abstract look at Ivy testing cycle.</em></p>
 <p>1. <strong>Test Data Generation</strong>: At this stage, we generate our test data for the testing function, using <a class="reference external" href="https://hypothesis.readthedocs.io/en/latest/">Hypothesis</a>
 and <a class="reference external" href="https://github.com/unifyai/ivy/tree/master/ivy_tests/test_ivy/helpers/hypothesis_helpers">test helpers</a> strategies. This is the most <strong>important</strong> step, we should ensure that our data generation is complete
@@ -668,19 +669,19 @@ and a variety performance details are supported. Let’s look at the function <a
 <ul class="simple">
 <li><p><strong>Jax</strong></p></li>
 </ul>
-<a class="reference internal image-reference" href="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/Jax_data_gen.png"><img alt="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/Jax_data_gen.png" src="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/Jax_data_gen.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/Jax_data_gen.png"><img alt="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/Jax_data_gen.png" src="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/Jax_data_gen.png" style="width: 600px;" /></a>
 <ul class="simple">
 <li><p><strong>Numpy</strong></p></li>
 </ul>
-<a class="reference internal image-reference" href="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/numpy_data_gen.png"><img alt="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/numpy_data_gen.png" src="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/numpy_data_gen.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/numpy_data_gen.png"><img alt="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/numpy_data_gen.png" src="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/numpy_data_gen.png" style="width: 600px;" /></a>
 <ul class="simple">
 <li><p><strong>Tensorflow</strong></p></li>
 </ul>
-<a class="reference internal image-reference" href="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/tensorflow_data_gen.png"><img alt="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/tensorflow_data_gen.png" src="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/tensorflow_data_gen.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/tensorflow_data_gen.png"><img alt="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/tensorflow_data_gen.png" src="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/tensorflow_data_gen.png" style="width: 600px;" /></a>
 <ul class="simple">
 <li><p><strong>Torch</strong></p></li>
 </ul>
-<a class="reference internal image-reference" href="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/torch_data_gen.png"><img alt="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/torch_data_gen.png" src="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/torch_data_gen.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/torch_data_gen.png"><img alt="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/torch_data_gen.png" src="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/torch_data_gen.png" style="width: 600px;" /></a>
 <p>It can be seen that the function doesn’t fail for <strong>Jax</strong>, <strong>Numpy</strong> and <strong>Torch</strong>, which is clearly not the case with
 <strong>Tensorflow</strong>, wherein 7 examples failed the test. One important thing to note is the number of values for which
 <a href="#id4"><span class="problematic" id="id5">**</span></a>Shrinking**(discussed in brief above) happened. Statistics for both <em>generate phase</em>, and <em>shrink phase</em> if the test
@@ -688,7 +689,7 @@ fails are printed in the output. If the tests are re-run, <em>reuse phase</em> s
 examples from previous runs are displayed.</p>
 <p>Another argument which can be specified for a more detailed output is <strong>hypothesis-verbosity = verbose</strong>. Let’s look at
 the newer output, for the same example -:</p>
-<a class="reference internal image-reference" href="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/test_run_data_gen.png"><img alt="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/test_run_data_gen.png" src="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/15_ivy_tests/test_run_data_gen.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/test_run_data_gen.png"><img alt="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/test_run_data_gen.png" src="https://raw.githubusercontent.com/unifyai/unifyai.github.io/master/img/externally_linked/deep_dive/ivy_tests/test_run_data_gen.png" style="width: 600px;" /></a>
 <p>Like the output above, Hypothesis will print all the examples for which the test failed, when <strong>verbosity</strong> is set.</p>
 <ol class="arabic simple" start="3">
 <li><p>Some performance related settings which might be helpful to know are-:</p></li>
@@ -785,7 +786,7 @@ src="https://www.youtube.com/embed/E6WgGp2_e5E" class="video">
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="docstring_examples.html" class="btn btn-neutral float-left" title="Docstring Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="array_api_tests.html" class="btn btn-neutral float-left" title="Array API Tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="ivy_frontends.html" class="btn btn-neutral float-right" title="Ivy Frontends" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
